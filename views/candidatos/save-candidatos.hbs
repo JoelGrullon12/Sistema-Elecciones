@@ -1,0 +1,120 @@
+<div class="row">
+
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+
+    {{#if hasPartidos }}
+    {{#if hasPuestos }}
+
+
+    <div class="card border border-dark shadow-lg p-3 mb-5 bg-body rounded">
+      <h4 class="card-header bg-dark text-white text-center note">
+        {{#if editMode}}Editar{{else}}Crear{{/if}} Candidato
+      </h4>
+      <div class="card-body">
+
+        <form enctype="multipart/form-data" method="POST"
+          action="{{#if editMode}}/edit-candidatos{{else}}/create-candidatos{{/if}}">
+
+
+          {{!-- NOMBRE --}}
+          <div class="mb-3">
+            <label for="name" class="form-label h5">Nombre</label>
+            <input required type="text" class="form-control border border-dark" id="name" name="Nombre"
+              value="{{#if editMode}}{{candidato.nombre}}{{/if}}" />
+          </div>
+
+          {{!-- APELLIDO --}}
+          <div class="mb-3">
+            <label for="apellido" class="form-label h5">Apellido</label>
+            <input required type="text" class="form-control border border-dark" id="apellido" name="Apellido"
+              value="{{#if editMode}}{{candidato.apellido}}{{/if}}" />
+          </div>
+
+          {{!-- FOTO DE PERFIL --}}
+
+          <div class="mb-3">
+            <label for="Image" class="form-label h5">Selecciona una Foto de Perfil:</label>
+            <input type="file" class="form-control border border-dark" accept="image/*" id="Image" name="Image" {{#if
+              editMode}}{{else}}required{{/if}} />
+          </div>
+
+
+          {{!-- PARTIDO --}}
+
+          <div class="mb-3">
+            <label for="partidos" class="form-label h5">Partidos </label>
+            <select required class="form-select border border-dark" id="partidos" name="Partidos" required>
+              <option option value="" selected>Seleccione un Partido</option>
+
+              {{#each partidos as |partido|}}
+
+              {{#if (equalValue partido.id ../candidato.partidoId )}}
+              <option selected value="{{partido.id}}">{{partido.nombre}}</option>
+              {{else}}
+              <option value="{{partido.id}}">{{partido.nombre}}</option>
+              {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+
+
+
+          {{!-- PUESTO --}}
+
+          <div class="mb-3">
+            <label for="puestos" class="form-label h5">Puestos </label>
+            <select required class="form-select border border-dark" id="puestos" name="Puestos">
+              <option value="" selected>Seleccione un Puesto</option>
+
+              {{#each puestos as |puesto|}}
+
+              {{#if (equalValue puesto.id ../candidato.puestoId )}}
+              <option selected value="{{puesto.id}}">{{puesto.nombre}}</option>
+              {{else}}
+              <option value="{{puesto.id}}">{{puesto.nombre}}</option>
+              {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+
+          {{#unless isEleccion}}
+
+          {{!-- ESTADO --}}
+          <div class="mb-3">
+            <label for="estado" class="form-label">Estado </label>
+            <select required id="estado" name="Estado" class="form-select border border-dark"
+              aria-label="Default select example">
+              <option value="" selected> Selecciona el Estado del Candidato</option>
+
+              <option value="0" {{#if (equalValue candidato.estado false )}} selected {{else}}{{/if}}>
+                Inactivo
+              </option>
+              <option value="1" {{#if (equalValue candidato.estado true )}} selected {{else}}{{/if}}> Activo</option>
+            </select>
+          </div>
+          {{/unless}}
+          <input type="hidden" name="candidatoId" value="{{candidato.id}}">
+
+
+          <button type="submit" class="btn btn-outline-success">{{#if editMode}}Editar{{else}}Crear{{/if}}</button>
+          <a href="/candidatos" type="button" class="btn btn-outline-secondary">Volver atras</a>
+        </form>
+
+      </div>
+    </div>
+    {{else}}
+    <h1>No hay Puestos Electorales creados en el sistema</h1>
+
+    {{/if}}
+
+    {{else}}
+    <h1>No hay Partidos creados en el sistema</h1>
+
+    {{/if}}
+
+  </div>
+
+</div>

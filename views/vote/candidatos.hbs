@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/assets/css/votarCandidatos.css">
+
+<form action="/votar-candidato" method="post">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-4">
+            <label>
+                <input type="radio" name="candidatoId" class="card-input-element" value="0" required />
+                <div class="card card-default card-input">
+                    <div class="card-header text-center">
+                        <h4>Dimitir</h4>
+                    </div>
+                    <div class="card-body">
+                        <img src="/assets/img/ninguno.png" class="card-img-top" alt="Ninguno" />
+                        <h4 class="card-title text-center">
+                            Ninguno
+                        </h4>
+                    </div>
+                </div>
+            </label>
+        </div>
+
+        {{#each candidatos as |candidato|}}
+        <div class="col-md-4 col-lg-4 col-sm-4">
+            <label>
+                <input type="radio" name="candidatoId" class="card-input-element" value="{{candidato.id}}" required />
+                <div class="card card-default card-input">
+                    <div class="card testimonial-card shadow p-2 mb-3  bg-body rounded">
+                        <span class="fs-3 text-center">
+                            {{candidato.partido.dataValues.nombre}}
+                        </span>
+                        <hr />
+                        <div class="card-up">
+                            <img src=" {{candidato.partido.dataValues.logoUrl}}" style="max-height: 300px;" />
+                        </div>
+
+                        <div class="avatar mx-auto bg-white">
+                            <img src="{{candidato.imgUrl}}" class=" img-fluid" />
+                        </div>
+                        <div class="card-body">
+                            <h3 class="mb-4 text-center">
+                                <span class="fw-light">
+                                    {{candidato.nombre}} {{candidato.apellido}} </span>
+                            </h3>
+                            <hr />
+                            <div class="fs-4 mt-2 text-center">
+                                {{candidato.puesto.dataValues.nombre}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+        </div>
+        {{/each}}
+
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary disabled" id="btnVotar">Votar</button>
+        </div>
+    </div>
+    <input type="hidden" name="puestoId" value="{{puesto.id}}">
+</form>
+<script src="/assets/js/jquery-3.6.1.min.js"></script>
+<script src="/assets/js/candidatos.js"></script>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/assets/css/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    </link>
+</head>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Leonel Fernandez APP</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        {{#if isLoggedIn}}
+
+                        {{#if isAdmin}}
+                        <li class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <a class="nav-link {{#if homeActive}} active {{/if}}" aria-current="page" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{#if partidosActive}} active {{/if}}" href="/partidos/">Partidos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{#if puestosActive}} active {{/if}}" href="/puestos/">Puestos
+                                Electivos</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{#if candidatosActive}} active {{/if}}"
+                                href="/candidatos/">Candidatos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{#if ciudadanosActive}} active {{/if}}"
+                                href="/ciudadanos/">Ciudadanos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{#if eleccionesActive}} active {{/if}}"
+                                href="/elecciones/">Elecciones</a>
+                        </li>
+                        {{/if}}
+
+
+                        {{#unless todoVotado}}
+                        <li class="nav-item izquierda">
+                            <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
+                                <button type="submit" class="btn btn-danger ">Cerrar Sesion <i
+                                        class="fas fa-sign-in-alt"></i></button>
+                            </form>
+                        </li>
+
+                        {{/unless}}
+                        {{else}}
+
+                        {{#if adminView}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Iniciar como Ciudadano</a>
+                        </li>
+                        {{else}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/">Iniciar como Administrador</a>
+                        </li>
+                        {{/if}}
+                        {{/if}}
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid mt-3 mb-5">
+        {{#if errors}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                {{#each errors as |error|}}
+                <li>{{error}}</li>
+                {{/each}}
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
+        {{{body}}}
+    </div>
+
+</body>
+
+<script src="/assets/js/lib/bootstrap/bootstrap.min.js"></script>
+
+</html>

@@ -1,0 +1,60 @@
+<section class="py-5 text-center container">
+  <div class="row">
+    <div class="col-lg-9 col-md-8 mx-auto">
+      <h1 class="fw-light mb-3">MANTENIMIENTO DE PUESTOS ELECTIVOS</h1>
+      <p>
+        {{#unless isEleccion}}
+        <a href="/create-puestos" class="btn btn-outline-secondary">Añadir nuevo Puesto</a>
+        {{/unless}}
+      </p>
+      <hr>
+
+    </div>
+  </div>
+</section>
+
+<div class="album py-5" style="background-color: #EAECEE;">
+  <div class="container">
+
+    <div class="row">
+
+      {{#if hasPuestos}}
+
+      {{#each puestos as |puesto|}}
+
+      <div class="card col-md-3 m-2 shadow border border-danger p-3 mb-5 bg-body rounded" style="width: 24rem; ">
+        <div class="card-body">
+
+          <h5 class="card-title">Puesto:
+            <span class="font-monospace">{{puesto.nombre}}</span>
+          </h5>
+
+          <h5 class="card-subtitle mb-2">Estado:
+            {{#if this.estado}} <span class="badge bg-success font-monospace">Activo <i class="fas fa-check"></i></span>
+            {{else}}<span class="badge  bg-danger font-monospace">Inactivo <i
+                class="fas fa-times-circle"></i></span>{{/if}}
+          </h5>
+          <p class="card-subtitle  mt-2 scrollable">Descripcion:
+            <br>
+            <span class="fw-light">{{this.descripcion}}</span>
+          </p>
+          <a href="/edit-puestos/{{puesto.id}}?edit=true" class="btn btn-outline-warning">Editar <i
+              class="fas fa-edit"></i></a>
+
+          <a href="/confirm-delete-puestos/{{this.id}}?confirmDelete=true" class="btn btn-outline-danger">Delete <i
+              class="far fa-trash-alt"></i></a>
+
+        </div>
+      </div>
+
+      {{/each}}
+
+      {{else}}
+
+      <h1>No hay Puestos creados</h1>
+
+      {{/if}}
+
+    </div>
+  </div>
+</div>

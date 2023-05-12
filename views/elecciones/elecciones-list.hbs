@@ -1,0 +1,61 @@
+<section class="py-5 text-center container">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">HISTORIAL DE ELECCIONES <i class="fas fa-history" style="color: red;"></i></h1>
+      {{#if eleccionActiva}}
+      {{else}}
+      <p>
+        <a href="/create-elecciones" class="btn btn-outline-secondary">Iniciar Proceso de Eleccion</a>
+      </p>
+      {{/if}}
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+
+      {{#if hasElecciones}}
+
+      {{#each elecciones as |eleccion|}}
+
+      <div class="card col-md-3 m-2 border border-dark shadow p-2 m-4 bg-body rounded" style="width: 24rem; ">
+        <div class="card-body">
+
+          <h5 class="card-title">Eleccion:
+            <span class="font-monospace">{{eleccion.nombre}}</span>
+          </h5>
+
+          <h5 class="card-subtitle mb-2">Estado:
+            {{#if this.estado}}<span class="badge rounded-pill bg-success font-monospace">Activa</span>{{else}} <span
+              class="badge rounded-pill bg-danger font-monospace"> Finalizada </span>{{/if}}
+          </h5>
+
+          <div class="mt-4">
+            {{#if this.estado}}
+            <a href="/finalizar-elecciones/{{eleccion.id}}" class="btn btn-warning">Finalizar Elecciones</a>
+            {{else}}
+            <a href="/resultados-elecciones/{{eleccion.id}}" class="btn btn-primary position-relative">Ver Resultados
+              <span
+                class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      {{/each}}
+
+      {{else}}
+
+      <h1>No hay Elecciones creadas</h1>
+
+      {{/if}}
+
+    </div>
+  </div>
+</div>

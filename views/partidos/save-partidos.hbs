@@ -1,0 +1,68 @@
+<div class="row">
+
+  <div class="col-md-3"></div>
+  <div class="col-md-6 ">
+
+    <div class="card border border-dark shadow-lg p-3 mb-5 bg-body rounded">
+      <h4 class="card-header bg-dark text-white text-center note">
+        {{#if editMode}}Editar{{else}}Crear{{/if}} Partido
+      </h4>
+
+      <div class="card-body">
+
+        <form enctype="multipart/form-data" method="POST"
+          action="{{#if editMode}}/edit-partidos{{else}}/create-partidos{{/if}}">
+
+
+          {{!-- NOMBRE --}}
+          <div class="mb-3">
+            <label for="name" class="form-label h5">Nombre</label>
+            <input required type="text" class="form-control border border-dark" id="name" name="Nombre"
+              value="{{#if editMode}}{{partido.nombre}}{{/if}}" />
+          </div>
+
+          {{!-- DESCRIPCION --}}
+          <div class="mb-3">
+            <label for="description" class="form-label h5">Descripcion</label>
+            <textarea name="Descripcion" id="description" cols="60" rows="5" class="form-control border border-dark"
+              required>{{#if editMode}}{{partido.descripcion}}{{/if}}</textarea>
+          </div>
+
+          {{!-- LOGO DEL PARTIDO --}}
+
+          <div class="mb-3">
+            <label for="Image" class="form-label h5">Seleccione el Logo del Partido</label>
+            <input type="file" class="form-control border border-dark" accept="image/*" id="Image" name="Image" {{#if
+              editMode}}{{else}}required{{/if}} />
+          </div>
+
+
+          {{!-- ESTADO --}}
+          <div class="mb-3">
+            <label for="estado" class="form-label h5">Estado </label>
+            <select required id="estado" name="Estado" class="form-select border border-dark"
+              aria-label="Default select example">
+              <option value="" selected> Selecciona el Estado del Candidato</option>
+
+              <option value="0" {{#if (equalValue partido.estado false )}} selected {{else}}{{/if}}>
+                Inactivo
+              </option>
+              <option value="1" {{#if (equalValue partido.estado true )}} selected {{else}}{{/if}}> Activo</option>
+            </select>
+          </div>
+
+
+          <input type="hidden" name="partidoId" value="{{partido.id}}">
+
+
+          <button type="submit" class="btn btn-outline-success">{{#if editMode}}Editar{{else}}Crear{{/if}}</button>
+          <a href="/partidos" type="button" class="btn btn-outline-secondary">Volver atras</a>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-6"></div>
+
+</div>

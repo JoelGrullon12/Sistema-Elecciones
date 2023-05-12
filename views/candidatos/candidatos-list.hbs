@@ -1,0 +1,81 @@
+<section class="py-5 text-center container">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">MANTENIMIENTO DE CANDIDATOS</h1>
+      <p>
+        {{#unless isEleccion}}
+        <a href="/create-candidatos" class="btn btn-outline-secondary">Añadir nuevo
+          Candidato</a>
+          {{/unless}}
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+
+      {{#if hasCandidatos}}
+
+      {{#each candidatos as |candidato|}}
+
+      <div class="card col-md-3 m-2 shadow p-3 mb-5 bg-body rounded border border-success" style="width: 24rem; ">
+        <div class="card-content">
+          <div class="card-img image">
+
+            <img src="{{candidato.imgUrl}}" class="card-img-top" alt="{{this.nombre}}" />
+            <span>
+              <h4>{{candidato.nombre}} {{candidato.nombre}}</h4>
+            </span>
+          </div>
+
+
+          <h4 class="card-title text-center mt-2 mb-3">
+            <span class="font-monospace">{{candidato.nombre}}
+              {{this.apellido}}</span>
+          </h4>
+
+          {{!-- <h5 class="card-subtitle mb-2">Apellido:
+            {{this.apellido}}</h5> --}}
+
+          <h5 class="card-subtitle mb-2">Puesto:
+            <span class="font-monospace">{{candidato.puesto.dataValues.nombre}}</span>
+          </h5>
+
+          <h5 class="card-subtitle mb-2">Partido:
+            <span class="font-monospace">
+              {{candidato.partido.dataValues.nombre}}
+            </span>
+          </h5>
+
+          <h5 class="card-subtitle mb-2 ">Estado:
+            {{#if this.estado}} <span class="badge rounded-pill  bg-success font-monospace">Activo <i
+                class="fas fa-check"></i></span> {{else}}<span
+              class="badge rounded-pill bg-danger font-monospace">Inactivo <i
+                class="fas fa-times-circle"></i></span>{{/if}}
+          </h5>
+          <div class="d-grid gap-2 d-md-block mb-3 mt-3">
+
+            <a href="/edit-candidatos/{{candidato.id}}?edit=true" class="btn btn-outline-warning">Editar <i
+                class="fas fa-edit"></i></a>
+
+            <a href="/confirm-delete-candidatos/{{this.id}}?confirmDelete=true" class="btn btn-outline-danger">Delete <i
+                class="far fa-trash-alt"></i></a>
+          </div>
+
+        </div>
+      </div>
+
+      {{/each}}
+
+      {{else}}
+
+      <h1>No hay Candidatos creados</h1>
+
+      {{/if}}
+
+    </div>
+  </div>
+</div>

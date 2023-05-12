@@ -1,0 +1,27 @@
+<div class="alert alert-danger" role="alert">
+  <div class="d-flex justify-content-center">
+
+    <h2 class="alert-heading text-primary">¿Estas seguro que deseas finalizar estas elecciones ({{eleccion.nombre}})?
+    </h2>
+  </div>
+  <div class="d-flex justify-content-center mt-4">
+
+    <h5>Al finalizar estas elecciones, los ciudadanos ya no podran votar en ellas pero se podran ver los resultados.</h5>
+  </div>
+
+  <hr />
+
+  <div class="d-flex justify-content-center">
+
+    <form class="form-inline" action="/finalizar-eleccion" method="post">
+      <input type="hidden" name="eleccionId" value="{{eleccion.id}}" />
+      <button type="submit" class="btn btn-danger">Finalizar</button>
+    </form>
+    <div class="mx-4">
+      <a href="/elecciones" type="button" class="btn btn-warning">Volver Atras</a>
+
+    </div>
+
+  </div>
+
+</div>

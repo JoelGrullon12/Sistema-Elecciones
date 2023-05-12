@@ -1,0 +1,28 @@
+<div class="alert alert-danger m-5 shadow-lg p-3 mb-5 bg-body rounded" role="alert">
+  <div class="d-flex justify-content-center">
+
+    <h2 class="alert-heading text-primary">Estas seguro que deseas eliminar este
+      Candidato?
+    </h2>
+  </div>
+  <div class="d-flex justify-content-center mt-4">
+
+    <h5>Al eliminar este Candidato ya no se podra revocar los cambios</h5>
+  </div>
+
+  <hr />
+
+  <div class="d-flex justify-content-center">
+
+    <form class="form-inline" action="/delete-candidatos" method="post">
+      <input type="hidden" name="candidatosId" value="{{candidatoId}}" />
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+    <div class="mx-4">
+      <a href="/candidatos" type="button" class="btn btn-warning">Volver atras</a>
+
+    </div>
+
+  </div>
+
+</div>

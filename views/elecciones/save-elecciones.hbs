@@ -1,0 +1,44 @@
+<div class="row">
+  {{#if exitCandidatos}}
+
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+
+    <div class="card">
+      <h4 class="card-header bg-dark text-white text-center note">
+        Crear Elecciones
+      </h4>
+      <div class="card-body">
+
+        <form method="POST" action="/create-elecciones">
+
+
+          {{!-- NOMBRE --}}
+          <div class="mb-3">
+            <label for="name" class="form-label h5">Nombre</label>
+            <input required type="text" class="form-control border border-dark" id="name" name="Nombre" />
+          </div>
+
+          <div class="mb-3">
+            <p class="text-danger border border-danger p-2">
+              Al crear una nueva eleccion, esta se activara automaticamente, parte del sistema se bloqueara y no se
+              podran editar ningunas de las entidades hasta que se finalice la votacion. Aun se podran seguir
+              visualizando todas las entidades creadas en el sistema y los resultados de elecciones anteriores.
+            </p>
+          </div>
+
+          <button type="submit" class="btn btn-outline-success">Crear</button>
+          <a href="/elecciones" type="button" class="btn btn-outline-secondary">Volver Atras</a>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-6"></div>
+
+
+  {{else}}
+  <h1>No hay Suficientes Candidatos Activos en el Sistema para Realizar una Eleccion Electoral</h1>
+  {{/if}}
+</div>

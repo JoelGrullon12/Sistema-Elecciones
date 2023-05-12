@@ -1,0 +1,48 @@
+<div class="album py-5 bg-light">
+  <div class="container">
+    {{#if todoVotado}}
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <form action="/finalizar-votacion" method="post">
+          <button type="submit" class="btn btn-success">Finalizar Votacion</button>
+        </form>
+      </div>
+    </div>
+    {{/if}}
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center mb-4">
+        <h2>Puestos disponibles para votar</h2>
+      </div>
+    </div>
+    <div class="row">
+
+      {{#each puestos as |puesto|}}
+
+      <div class="card col-md-3 m-2 shadow p-3  bg-body border border-info  rounded m-4" style="width: 24rem; ">
+        <div class="card-body text-center">
+          <form action="/elegir-candidato" method="post">
+
+            <h3 class="card-title">
+              <span class="text-dark fw-bold">{{puesto.nombre}}</span>
+            </h3>
+
+            <p class="card-subtitle mb-2 text-primary">
+              {{puesto.descripcion}}
+            </p>
+
+            {{#if puesto.votado}}
+            <h4 class="text-danger">Votado</h4>
+            {{else}}
+            <button type="submit" class="btn btn-success">Votar</button>
+            {{/if}}
+            <input type="hidden" name="puestoId" value="{{puesto.id}}">
+          </form>
+        </div>
+      </div>
+
+      {{/each}}
+
+    </div>
+
+  </div>
+</div>

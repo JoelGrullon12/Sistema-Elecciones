@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        <div class="card">
+            <h4 class="card-header bg-dark text-white text-center note">
+                {{#if editMode}}Editar{{else}}Crear{{/if}} Ciudadano
+            </h4>
+            <div class="card-body">
+
+                <form method="POST" action="{{#if editMode}}/edit-ciudadanos{{else}}/create-ciudadanos{{/if}}">
+
+                    {{!-- CEDULA --}}
+                    <div class="mb-3">
+                        <label for="txtCedula" class="form-label h5">Cedula</label>
+                        <input required type="text" class="form-control border border-dark" id="txtCedula"
+                            maxlength="13" name="Cedula" value="{{#if editMode}}{{ciudadano.cedula}}{{/if}}" />
+                    </div>
+
+                    {{!-- NOMBRE --}}
+                    <div class="mb-3">
+                        <label for="name" class="form-label h5">Nombre</label>
+                        <input required type="text" class="form-control border border-dark" id="name" name="Nombre"
+                            value="{{#if editMode}}{{ciudadano.nombre}}{{/if}}" />
+                    </div>
+
+                    {{!-- APELLIDO --}}
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label h5">Apellido</label>
+                        <input required type="text" class="form-control border border-dark" id="apellido"
+                            name="Apellido" value="{{#if editMode}}{{ciudadano.apellido}}{{/if}}" />
+                    </div>
+
+                    {{!-- EMAIL --}}
+                    <div class="mb-3">
+                        <label for="email" class="form-label h5">Correo:</label>
+                        <input type="text" class="form-control border border-dark" id="email" name="Email"
+                            value="{{#if editMode}}{{ciudadano.email}}{{/if}}" />
+                    </div>
+
+                    {{!-- ESTADO --}}
+                    <div class="mb-3">
+                        <label for="estado" class="form-label h5">Estado </label>
+                        <select required id="estado" name="Estado" class="form-select border border-dark"
+                            aria-label="Default select example">
+                            <option value="" selected>Selecciona el Estado del Ciudadano</option>
+                            <option value="1" {{#if (equalValue ciudadano.estado true)}}selected{{else}}{{/if}}>Activo
+                            </option>
+                            <option value="0" {{#if (equalValue ciudadano.estado false)}}selected{{else}}{{/if}}>
+                                Inactivo</option>
+                        </select>
+                    </div>
+
+
+                    <input type="hidden" name="ciudadanoId" value="{{ciudadano.id}}">
+
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="submit" class="btn btn-outline-success">{{#if
+                            editMode}}Editar{{else}}Crear{{/if}}</button>
+                        <a href="/ciudadanos" type="button" class="btn btn-outline-secondary">Volver Atras</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/assets/js/jquery-3.6.1.min.js"></script>
+<script src="/assets/js/cedula.js"></script>

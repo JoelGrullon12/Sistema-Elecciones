@@ -1,0 +1,78 @@
+<section class=" text-center container album py-5 ">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light mb-3">MANTENIMIENTO DE PARTIDOS</h1>
+      <p>
+        {{#unless isEleccion}}
+        <a href="/create-partidos" class="btn btn-outline-secondary">Añadir nuevo
+          Partido</a>
+          {{/unless}}
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-dark fadeInDown">
+  <div class="container">
+
+    <div class="row">
+
+      {{#if hasPartidos}}
+
+      {{#each partidos as |partido|}}
+
+      <div class="card col-md-4 m-4 shadow p-3 mb-5 bg-body border border-danger  rounded" style="width: 24rem; ">
+        {{!-- <div class="card-body"> --}}
+          <div class="card-content">
+            <div class="card-img image">
+              <img src="{{partido.logoUrl}}" alt="{{this.nombre}}" style="max-height: 300px;" />
+              <span>
+                <h4>{{partido.nombre}}</h4>
+              </span>
+            </div>
+
+
+            <h5 class="card-title mt-3">Partido:
+              <span class="font-monospace">{{partido.nombre}}</span>
+            </h5>
+
+            <h5 class="card-subtitle mb-2">Estado:
+
+              {{#if this.estado}} <span class="badge rounded-pill bg-success font-monospace">Activo <i
+                  class="fas fa-check"></i></span> {{else}}<span
+                class="badge rounded-pill bg-danger font-monospace">Inactivo <i
+                  class="fas fa-times-circle"></i></span>{{/if}}
+            </h5>
+
+            <p class="card-subtitle  mt-2 scrollable"> Descripcion:
+              <br>
+
+              <span class="fw-light">{{this.descripcion}}</span>
+
+            </p>
+
+            <div class="d-grid gap-2 d-md-block mb-3 mt-3">
+
+              <a href="/edit-partidos/{{partido.id}}?edit=true" class="btn btn-outline-warning">Editar <i
+                  class="fas fa-edit"></i></a>
+
+              <a href="/confirm-delete-partidos/{{this.id}}?confirmDelete=true" class="btn btn-outline-danger">Delete <i
+                  class="far fa-trash-alt"></i></a>
+            </div>
+
+          </div>
+          {{!--
+        </div> --}}
+      </div>
+
+      {{/each}}
+
+      {{else}}
+
+      <h1>No hay Partidos creados</h1>
+
+      {{/if}}
+
+    </div>
+  </div>
+</div>
